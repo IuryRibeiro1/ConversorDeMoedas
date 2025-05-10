@@ -9,3 +9,12 @@
 
 - `Funcionalidade 1`: Converter moedas com valores atualizados em tempo real
 - `Funcionalidade 2`: Calcular valor da conversão
+
+
+## ✔️ Técnicas e tecnologias utilizadas
+
+- ``Java 21``
+- ``InteliJ IDEA``
+- ``API``
+- ``Paradigma de orientação a objetos``
+- ``Git bash e GitHub``
