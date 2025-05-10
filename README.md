@@ -3,3 +3,9 @@
 <p align="center">
 :construction: Projeto finalizado! :construction:
 </p>
+
+
+# :hammer: Funcionalidades do projeto
+
+- `Funcionalidade 1`: Converter moedas com valores atualizados em tempo real
+- `Funcionalidade 2`: Calcular valor da conversão
