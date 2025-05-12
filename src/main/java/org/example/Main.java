@@ -34,8 +34,8 @@ public class Main {
             Moedas todasMoedas = listaService.getMoedas();
 
             List<List<String>> moedasExibicao = todasMoedas.getSupported_codes().stream()
-                    .filter(m -> Set.of("USD", "EUR", "BRL", "GBP", "JPY",
-                            "CAD", "AUD", "CHF", "CNY", "MXN").contains(m.get(0)))
+                    .filter(m -> Set.of("ARS", "BOB", "BRL", "CLP", "COP",
+                            "USD").contains(m.get(0)))
                     .collect(Collectors.toList());
             moedasExibicao.forEach(moeda ->
                     System.out.println(moeda.get(0) + " - " + moeda.get(1)));

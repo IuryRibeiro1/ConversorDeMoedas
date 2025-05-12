@@ -56,11 +56,10 @@ public class Moedas {
 
     @Override
     public String toString() {
-        return "Moedas{" +
-                "base_code='" + base_code + '\'' +
-                ", target_code='" + target_code + '\'' +
-                ", conversion_rate=" + conversion_rate +
-                ", conversion_result=" + conversion_result +
-                '}';
+        return
+                "Moeda: " + base_code +
+                ", Moeda convertida: " + target_code +
+                ", Taxa de conversão:  " + conversion_rate +
+                ", Resultado da conversão: " + conversion_result;
     }
 }
