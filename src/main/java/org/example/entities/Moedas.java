@@ -2,10 +2,6 @@ package org.example.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.Currency;
-import java.util.List;
-import java.util.Map;
-
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Moedas {
@@ -14,7 +10,6 @@ public class Moedas {
     private Double conversion_rate;
     private Double conversion_result;
 
-    // Getters e Setters
     public String getBase_code() {
         return base_code;
     }
@@ -45,5 +40,15 @@ public class Moedas {
 
     public void setConversion_result(Double conversion_result) {
         this.conversion_result = conversion_result;
+    }
+
+    @Override
+    public String toString() {
+        return "Moedas{" +
+                "base_code='" + base_code + '\'' +
+                ", target_code='" + target_code + '\'' +
+                ", conversion_rate=" + conversion_rate +
+                ", conversion_result=" + conversion_result +
+                '}';
     }
 }
