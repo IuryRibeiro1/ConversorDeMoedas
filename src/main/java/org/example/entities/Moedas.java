@@ -2,6 +2,9 @@ package org.example.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+import java.util.Map;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Moedas {
@@ -9,6 +12,7 @@ public class Moedas {
     private String target_code;
     private Double conversion_rate;
     private Double conversion_result;
+    private List<List<String>> supported_codes;
 
     public String getBase_code() {
         return base_code;
@@ -40,6 +44,14 @@ public class Moedas {
 
     public void setConversion_result(Double conversion_result) {
         this.conversion_result = conversion_result;
+    }
+
+    public List<List<String>> getSupported_codes() {
+        return supported_codes;
+    }
+
+    public void setSupported_codes(List<List<String>> supported_codes) {
+        this.supported_codes = supported_codes;
     }
 
     @Override
