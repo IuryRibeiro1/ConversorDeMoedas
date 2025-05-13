@@ -8,14 +8,21 @@ import service.ListaService;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
 public class Main {
 
+    private static final Logger logInfo = Logger.getLogger(Main.class.getName());
+
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
+        logInfo.setLevel(Level.ALL);
+
+        logInfo.info("O sistema iniciou! ");
 
         Scanner sc = new Scanner(System.in);
 
@@ -53,6 +60,7 @@ public class Main {
 
             ConversorService conversorService = new ConversorService();
             Moedas moedas = conversorService.getMoedas(base_code, target_code, valor);
+            logInfo.info("As moedas selecionadas foram adicionadas ao construtor");
 
             System.out.println(gson.toJson(moedas));
             moedasFiltradas.add(conversorService.getMoedas(base_code, target_code, valor));
@@ -61,11 +69,16 @@ public class Main {
             laco = sc.nextInt();
             if (laco == 0) {
                 System.out.println("Você converteu as seguintes moedas: ");
-                for(Moedas m : moedasFiltradas){
+                logInfo.info("Percorrida a lista e printado todas as moedas selecionadas pelo usuário");
+                for (Moedas m : moedasFiltradas) {
                     System.out.println(m);
+
                 }
                 System.out.println();
                 System.out.println("Até a próxima");
+
+                logInfo.info("O sistema encerrou! ");
+
             }
         }
 
