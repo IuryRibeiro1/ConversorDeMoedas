@@ -60,7 +60,7 @@ public class Main {
 
             ConversorService conversorService = new ConversorService();
             Moedas moedas = conversorService.getMoedas(base_code, target_code, valor);
-            logInfo.info("As moedas selecionadas foram adicionadas ao construtor");
+            logInfo.info("As moedas selecionadas foram adicionadas na lista");
 
             System.out.println(gson.toJson(moedas));
             moedasFiltradas.add(conversorService.getMoedas(base_code, target_code, valor));
@@ -68,15 +68,11 @@ public class Main {
             System.out.println("Deseja verificar outras moedas? " + "1-Sim " + "0-Não");
             laco = sc.nextInt();
             if (laco == 0) {
-                System.out.println("Você converteu as seguintes moedas: ");
                 logInfo.info("Percorrida a lista e printado todas as moedas selecionadas pelo usuário");
                 for (Moedas m : moedasFiltradas) {
                     System.out.println(m);
 
                 }
-                System.out.println();
-                System.out.println("Até a próxima");
-
                 logInfo.info("O sistema encerrou! ");
 
             }
