@@ -10,8 +10,8 @@ import java.util.Map;
 public class Moedas {
     private String base_code;
     private String target_code;
-    private Double conversion_rate;
-    private Double conversion_result;
+    private float conversion_rate;
+    private float conversion_result;
     private List<List<String>> supported_codes;
 
     public String getBase_code() {
@@ -22,11 +22,11 @@ public class Moedas {
         this.base_code = base_code;
     }
 
-    public Double getConversion_rate() {
+    public float getConversion_rate() {
         return conversion_rate;
     }
 
-    public void setConversion_rate(Double conversion_rate) {
+    public void setConversion_rate(float conversion_rate) {
         this.conversion_rate = conversion_rate;
     }
 
@@ -38,11 +38,11 @@ public class Moedas {
         this.target_code = target_code;
     }
 
-    public Double getConversion_result() {
+    public float getConversion_result() {
         return conversion_result;
     }
 
-    public void setConversion_result(Double conversion_result) {
+    public void setConversion_result(float conversion_result) {
         this.conversion_result = conversion_result;
     }
 
@@ -53,6 +53,7 @@ public class Moedas {
     public void setSupported_codes(List<List<String>> supported_codes) {
         this.supported_codes = supported_codes;
     }
+
 
     @Override
     public String toString() {

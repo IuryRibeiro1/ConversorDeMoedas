@@ -2,6 +2,7 @@ package org.example;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import org.example.entities.Moedas;
 import service.ConversorService;
 import service.ListaService;
@@ -11,11 +12,13 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Main {
 
-    private static final Logger logInfo = Logger.getLogger(Main.class.getName());
+    private static final Logger logInfo = Logger.getLogger(ListaService.class.getName());
 
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -32,11 +35,15 @@ public class Main {
 
         String base_code;
         String target_code;
+        String regex = "^[a-zA-Z]{3}$";
+        String regexNum = "^\\d+\\.?\\d{1,2}?$";
 
         List<Moedas> moedasFiltradas = new ArrayList<>();
 
-        int laco = 1;
-        while (laco != 0) {
+        Pattern pattern = Pattern.compile(regex);
+        Pattern patternNum = Pattern.compile(regexNum);
+
+        while (true) {
 
             Moedas todasMoedas = listaService.getMoedas();
 
@@ -48,36 +55,61 @@ public class Main {
                     System.out.println(moeda.get(0) + " - " + moeda.get(1)));
 
             System.out.println();
-            System.out.println("Insira a moeda base: ");
-            base_code = sc.next().toUpperCase();
 
-            System.out.println("Insira para qual moeda deseja converter: ");
-            target_code = sc.next().toUpperCase();
+            try {
+                System.out.println("Insira a moeda base: ");
+                base_code = sc.next().toUpperCase();
+                Matcher matcherBase = pattern.matcher(base_code);
 
-            Double valor;
-            System.out.println("Insira o valor que deseja converter: ");
-            valor = sc.nextDouble();
+                System.out.println("Insira para qual moeda deseja converter: ");
+                target_code = sc.next().toUpperCase();
+                Matcher matcherTarget = pattern.matcher(target_code);
 
-            ConversorService conversorService = new ConversorService();
-            Moedas moedas = conversorService.getMoedas(base_code, target_code, valor);
-            logInfo.info("As moedas selecionadas foram adicionadas na lista");
+                if(!matcherBase.matches() || !matcherTarget.matches()){
+                    System.out.println("Insira uma moeda correta");
 
-            System.out.println(gson.toJson(moedas));
-            moedasFiltradas.add(conversorService.getMoedas(base_code, target_code, valor));
-
-            System.out.println("Deseja verificar outras moedas? " + "1-Sim " + "0-Não");
-            laco = sc.nextInt();
-            if (laco == 0) {
-                logInfo.info("Percorrida a lista e printado todas as moedas selecionadas pelo usuário");
-                for (Moedas m : moedasFiltradas) {
-                    System.out.println(m);
-
+                    continue;
                 }
-                logInfo.info("O sistema encerrou! ");
+
+                float valor;
+                System.out.println("Insira o valor que deseja converter: ");
+                valor = sc.nextFloat();
+                System.out.println(String.valueOf(valor));
+                Matcher matcherNum = patternNum.matcher(String.valueOf(valor));
+                if(!matcherNum.matches()){
+                    System.out.println("Insira uma valor válido");
+
+                    continue;
+                }
+
+                ConversorService conversorService = new ConversorService();
+                Moedas moedas = conversorService.getMoedas(base_code, target_code, valor);
+                logInfo.info("As moedas selecionadas foram adicionadas na lista");
+
+                System.out.println(gson.toJson(moedas));
+                moedasFiltradas.add(conversorService.getMoedas(base_code, target_code, valor));
+
+                System.out.println("Deseja verificar outras moedas? " + "1-Sim " + "0-Não");
+                if (sc.nextInt() == 0) {
+                    logInfo.info("Percorrida a lista e printado todas as moedas selecionadas pelo usuário");
+                    for (Moedas m : moedasFiltradas) {
+                        System.out.println(m);
+
+                    }
+                    logInfo.info("O sistema encerrou! ");
+                    break;
+                }
+
+                } catch(RuntimeException e){
+                    System.out.println("A execução do programa falhou " + e);
+                }
+
+            logInfo.warning("Ocorreu um erro no programa");
+
+
 
             }
-        }
 
-    }
+        }
 
 }

@@ -12,7 +12,7 @@ import java.net.http.HttpResponse;
 public class ConversorService {
 
 
-    public Moedas getMoedas(String base_code , String target_code, Double amount) throws IOException, InterruptedException {
+    public Moedas getMoedas(String base_code , String target_code, float amount) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://v6.exchangerate-api.com/v6/b6c8cf92ef4798d32cd038fb/pair/" + base_code  +"/"+ target_code + "/" + amount))
