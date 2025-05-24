@@ -8,6 +8,7 @@ import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Moedas {
+
     private String base_code;
     private String target_code;
     private float conversion_rate;
